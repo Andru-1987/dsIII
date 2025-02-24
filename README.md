@@ -86,6 +86,8 @@ El NLP combina lingüística y aprendizaje automático para trabajar con **texto
 
 El algoritmo detrás de ChatGPT es un **modelo de lenguaje basado en redes neuronales profundas**, específicamente una variante de **GPT (Generative Pre-trained Transformer)** desarrollado por OpenAI.  
 
+[DNN](https://botpress.com/es/blog/deep-neural-network)
+
 ### 🔹 **Principales características del algoritmo de ChatGPT**  
 
 1. **Basado en la arquitectura Transformer**  
@@ -216,3 +218,6 @@ print(tokens)
 **Ejercicios de Amazon**
 USO DE NLP 
 
+--- 
+
+### CORPUS
