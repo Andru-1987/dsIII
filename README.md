@@ -214,10 +214,171 @@ print(tokens)
 
 
 ---
+Usos más comunes de la técnica **Bag of Words (BoW)** en procesamiento de lenguaje natural (NLP):
 
-**Ejercicios de Amazon**
-USO DE NLP 
+| Uso Común                      | Descripción                                                                                     |
+|--------------------------------|-------------------------------------------------------------------------------------------------|
+| **Clasificación de Texto**     | Se utiliza para categorizar documentos o reseñas en diferentes clases (ej. positivo/negativo).|
+| **Análisis de Sentimientos**   | Permite identificar el sentimiento detrás de un texto, clasificándolo en categorías emocionales.|
+| **Extracción de Características** | Se usa para convertir texto en vectores numéricos, facilitando su uso en algoritmos de machine learning.|
+| **Modelado de Temas**         | Ayuda a descubrir temas predominantes en un conjunto de documentos al analizar las palabras más frecuentes. |
+| **Recomendaciones de Contenido** | Puede mejorar sistemas de recomendación al analizar la similitud entre textos (ej. artículos, libros).|
+| **Búsqueda de Información**   | Facilita la indexación y recuperación de documentos relevantes en bases de datos o motores de búsqueda. |
+| **Análisis de Tendencias**    | Permite identificar tendencias en el uso de palabras o frases a lo largo del tiempo en redes sociales o artículos.|
+| **Generación de Resúmenes**   | Ayuda a identificar las palabras clave y frases más relevantes para crear resúmenes automáticos de textos largos. |
+| **Detección de Plagio**       | Se usa para comparar la similitud entre documentos y detectar contenido plagiado.              |
+| **Filtrado de Spam**          | Ayuda a clasificar correos electrónicos o mensajes como spam o no spam analizando las palabras clave. |
 
---- 
 
-### CORPUS
+---
+
+Claro, aquí tienes un ejemplo sencillo para ilustrar cómo se calcula TF-IDF:
+
+### Supongamos que tenemos un corpus de 3 documentos:
+
+- **Documento 1 (D1)**: "El perro juega en el parque."
+- **Documento 2 (D2)**: "El gato juega en la casa."
+- **Documento 3 (D3)**: "El perro y el gato están en casa."
+
+### Paso 1: Calcular TF
+
+Primero, contamos la frecuencia de cada término en cada documento:
+
+- **D1**:
+  - "El": 1
+  - "perro": 1
+  - "juega": 1
+  - "en": 1
+  - "parque": 1
+  - **Total**: 5
+
+  \[
+  TF(\text{"perro"}, D1) = \frac{1}{5} = 0.2
+  \]
+  \[
+  TF(\text{"juega"}, D1) = \frac{1}{5} = 0.2
+  \]
+
+- **D2**:
+  - "El": 1
+  - "gato": 1
+  - "juega": 1
+  - "en": 1
+  - "la": 1
+  - "casa": 1
+  - **Total**: 6
+
+  \[
+  TF(\text{"gato"}, D2) = \frac{1}{6} \approx 0.167
+  \]
+  \[
+  TF(\text{"juega"}, D2) = \frac{1}{6} \approx 0.167
+  \]
+
+- **D3**:
+  - "El": 1
+  - "perro": 1
+  - "y": 1
+  - "gato": 1
+  - "están": 1
+  - "en": 1
+  - "casa": 1
+  - **Total**: 7
+
+  \[
+  TF(\text{"perro"}, D3) = \frac{1}{7} \approx 0.143
+  \]
+  \[
+  TF(\text{"gato"}, D3) = \frac{1}{7} \approx 0.143
+  \]
+
+### Paso 2: Calcular IDF
+
+Ahora calculamos IDF para cada término:
+
+- **Número total de documentos (N)**: 3
+
+- **Documentos que contienen cada término**:
+  - "perro": 2 (D1, D3)
+  - "gato": 2 (D2, D3)
+  - "juega": 2 (D1, D2)
+  - "en": 3 (D1, D2, D3)
+  - "parque": 1 (D1)
+  - "casa": 2 (D2, D3)
+
+Usamos la fórmula para IDF:
+
+\[
+IDF(t) = \log\left(\frac{N}{|\{d \in D : t \in d\}|}\right)
+\]
+
+- **IDF("perro")**:
+  \[
+  IDF(\text{"perro"}) = \log\left(\frac{3}{2}\right) \approx 0.176
+  \]
+
+- **IDF("gato")**:
+  \[
+  IDF(\text{"gato"}) = \log\left(\frac{3}{2}\right) \approx 0.176
+  \]
+
+- **IDF("juega")**:
+  \[
+  IDF(\text{"juega"}) = \log\left(\frac{3}{2}\right) \approx 0.176
+  \]
+
+- **IDF("en")**:
+  \[
+  IDF(\text{"en"}) = \log\left(\frac{3}{3}\right) = 0
+  \]
+
+- **IDF("parque")**:
+  \[
+  IDF(\text{"parque"}) = \log\left(\frac{3}{1}\right) \approx 1.098
+  \]
+
+- **IDF("casa")**:
+  \[
+  IDF(\text{"casa"}) = \log\left(\frac{3}{2}\right) \approx 0.176
+  \]
+
+### Paso 3: Calcular TF-IDF
+
+Finalmente, multiplicamos TF y IDF para cada término en cada documento:
+
+- **Para D1**:
+  - **TF-IDF("perro", D1)**:
+    \[
+    TFIDF(\text{"perro"}, D1) = 0.2 \times 0.176 \approx 0.0352
+    \]
+  - **TF-IDF("juega", D1)**:
+    \[
+    TFIDF(\text{"juega"}, D1) = 0.2 \times 0.176 \approx 0.0352
+    \]
+  - **TF-IDF("parque", D1)**:
+    \[
+    TFIDF(\text{"parque"}, D1) = 0.2 \times 1.098 \approx 0.2196
+    \]
+
+- **Para D2**:
+  - **TF-IDF("gato", D2)**:
+    \[
+    TFIDF(\text{"gato"}, D2) \approx 0.167 \times 0.176 \approx 0.0294
+    \]
+  - **TF-IDF("juega", D2)**:
+    \[
+    TFIDF(\text{"juega"}, D2) \approx 0.167 \times 0.176 \approx 0.0294
+    \]
+
+- **Para D3**:
+  - **TF-IDF("perro", D3)**:
+    \[
+    TFIDF(\text{"perro"}, D3) \approx 0.143 \times 0.176 \approx 0.0252
+    \]
+  - **TF-IDF("gato", D3)**:
+    \[
+    TFIDF(\text{"gato"}, D3) \approx 0.143 \times 0.176 \approx 0.0252
+    \]
+
+Este es un ejemplo básico de cómo se calcula TF-IDF para un pequeño corpus. En la práctica, trabajarías con textos mucho más grandes y usarías herramientas y bibliotecas que faciliten estos cálculos.
+
